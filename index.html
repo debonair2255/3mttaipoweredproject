@@ -1,0 +1,153 @@
+ <!--
+    Copyright 2024 Google LLC
+    SPDX-License-Identifier: Apache-2.0
+  -->
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <meta name="color-scheme" content="dark light" />
+      <meta name="description" content="Explore AI-powered language detection and translation with our interactive playground. Translate text and listen to results in multiple languages." />
+      <!-- Language Detector API -->
+      <meta http-equiv="origin-trial" content="AsBU3QyUBL+Bp/ayVhXIzhF0+sBq5ScCkktyzBQ31GSnYzIQgfy218jUcgXkTaQPzivvIcyWPzLRQpk75rSi8g0AAABYeyJvcmlnaW4iOiJodHRwczovL2Nocm9tZS5kZXY6NDQzIiwiZmVhdHVyZSI6Ikxhbmd1YWdlRGV0ZWN0aW9uQVBJIiwiZXhwaXlyIjoxNzQ5NTk5OTk5fQ==" />
+      <!-- Translator API -->
+      <meta http-equiv="origin-trial" content="Alo80bBNgwjo5MP2/xIIZHcgQxL9iqWFITM6NhdzlgCOzvmNng+WQ8ErO1k5ch7+P168yxsSmMGYdJ0MPqWauw8AAABSeyJvcmlnaW4iOiJodHRwczovL2Nocm9tZS5kZXY6NDQzIiwiZmVhdHVyZSI6IlRyYW5zbGF0aW9uQVBJIiwiZXhwaXJ5IjoxNzUzMTQyNDAwfQ==" />
+      <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💬</text><svg>" />
+      <title>AI Translator & Language Detector Playgrond</title>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
+      <link rel="stylesheet" href="style.css" />
+      <script>
+        if (!isSecureContext) location.protocol = 'https:';
+      </script>
+      <script src="script.js" type="module"></script>
+    </head>
+    <body>
+      <header class="main-header">
+        <nav class="navbar">
+          <div class="logo">
+            <a href="/" aria-label="Home">
+              <svg class="logo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M12 2L2 7h20L12 2zm0 5v14m-8-8h16" />
+              </svg>
+              AI Translator
+            </a>
+          </div>
+          <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+      </header>
+  
+      <main>
+        <section id="home" class="hero">
+          <div class="container">
+            <h1>AI-Powered Translator & Language Detector</h1>
+            <p class="subtitle">Effortlessly translate text and detect languages using cutting-edge Chrome AI APIs. Type, translate, and listen in real-time.</p>
+            <a href="#playground" class="cta-button">Try the Playground</a>
+          </div>
+        </section>
+  
+        <section id="playground" class="playground">
+          <div class="container">
+            <h2>Translation Playground</h2>
+            <p class="section-description">Experience real-time language detection and translation with our interactive tool.</p>
+            <div class="api-note">
+              <strong>Note:</strong> This app uses experimental Language Detector and Translator APIs, available only in Chrome with the <a href="https://goo.gle/chrome-ai-dev-preview-join">Early Preview Program</a> enabled. Ensure you're using a supported Chrome version (e.g., Canary) and an HTTPS connection.
+              <details>
+                <summary>How to Enable APIs</summary>
+                <ul>
+                  <li>Go to <code>chrome://flags/#language-detection-api</code> and <code>chrome://flags/#translation-api</code></li>
+                  <li>Select <strong>Enabled</strong></li>
+                  <li>Click <strong>Relaunch</strong> or restart Chrome</li>
+                </ul>
+              </details>
+            </div>
+            <div class="not-supported-message" hidden>
+              Your browser doesn't support the Translator or Language Detector APIs. Please use Chrome with the <a href="https://goo.gle/chrome-ai-dev-preview-join">Early Preview Program</a> enabled.
+            </div>
+            <form aria-labelledby="form-title">
+              <h3 id="form-title" hidden>Translation Form</h3>
+              <div class="form-group">
+                <label for="input">Enter your text:</label>
+                <textarea id="input" aria-describedby="language-detection" placeholder="Type or paste your text here..." rows="5"></textarea>
+                <p id="language-detection" class="language-detection">Language: <span>Detecting...</span></p>
+              </div>
+              <div class="form-group">
+                <label for="translate">Select target language:</label>
+                <select id="translate" aria-label="Select target language">
+                  <option value="en">English</option>
+                  <option value="es" selected>Spanish</option>
+                  <option value="fr">French</option>
+                  <option value="ja">Japanese</option>
+                  <option value="pt">Portuguese</option>
+                  <option value="ru">Russian</option>
+                  <option value="tr">Turkish</option>
+                  <option value="zh">Chinese</option>
+                  <option value="de">German</option>
+                </select>
+              </div>
+              <button type="submit" class="translate-btn">Translate Now</button>
+            </form>
+            <div class="form-group output-group">
+              <label for="output">Translated Text:</label>
+              <output id="output"></output>
+              <button type="button" id="speak" aria-label="Listen to or stop translated text">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
+                  <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                  <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+                </svg>
+                Listen
+              </button>
+            </div>
+          </div>
+        </section>
+  
+        <section id="features" class="features">
+          <div class="container">
+            <h2>Why Use Our Translator?</h2>
+            <p class="section-description">Discover the powerful features that make our tool stand out.</p>
+            <div class="feature-grid">
+              <div class="feature-card">
+                <h3>Real-Time Language Detection</h3>
+                <p>Automatically detect the language of your input text with high accuracy using Chrome's AI APIs.</p>
+              </div>
+              <div class="feature-card">
+                <h3>Seamless Translation</h3>
+                <p>Translate text into multiple languages instantly with natural and accurate results.</p>
+              </div>
+              <div class="feature-card">
+                <h3>Text-to-Speech</h3>
+                <p>Listen to your translated text in the target language for better understanding and pronunciation.</p>
+              </div>
+              <div class="feature-card">
+                <h3>Developer-Friendly</h3>
+                <p>Built with experimental APIs, perfect for developers exploring AI-powered language tools.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+  
+        <section id="about" class="about">
+          <div class="container">
+            <h2>About This Project</h2>
+            <p class="section-description">Learn more about the technology and vision behind this playground.</p>
+            <p>This project showcases the capabilities of Chrome's experimental Language Detector and Translator APIs. Created by Eno-obong Umoh, it aims to provide an accessible and interactive way to explore AI-driven language processing. Whether you're a developer, educator, or language enthusiast, this tool is designed to inspire and educate.</p>
+            <p>Powered by Google's Chrome AI APIs, this playground is part of the <a href="https://goo.gle/chrome-ai-dev-preview-join">Early Preview Program</a>, offering a glimpse into the future of web-based AI applications.</p>
+          </div>
+        </section>
+           
+          </div>
+          <div class="footer-bottom">
+            <p>Created by Eno-obong Umoh | Powered by Chrome AI APIs</p>
+            <p>&copy; 2025 AI Translator. All Rights Reserved.</p>
+          </div>
+        </div>
+      </footer>
+      
+    </body>
+  </html>
